@@ -1,3 +1,11 @@
+/* Assignment #: 4
+         Name: Divanshu Chauhan
+    StudentID: 1224087311
+      Lecture: MW 1:30PM-2:45PM
+ Description: Department class creates a department object with
+              name, manager, division and locarion.
+ */
+
 class Department {
     // Instance variables
     public String name;
@@ -7,6 +15,7 @@ class Department {
 
     // Constructors
     public Department() {
+        // Set the default values
         name = "";
         manager = new Manager();
         division = "";
@@ -63,6 +72,7 @@ class Department {
 
     // Return a string with the department's information
     public String toString() {
-        return "Department Name:\t"+name+"\nDivision:\t"+division+"\nLocation:\t"+location+"\nManager Information:"+manager.toString();
+        return "Department Name:\t" + name + "\nDivision:\t" + division + "\nLocation:\t" + location
+                + "\nManager Information:" + manager.toString();
     }
 }

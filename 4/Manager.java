@@ -1,3 +1,12 @@
+/* Assignment #: 4
+         Name: Divanshu Chauhan
+    StudentID: 1224087311
+      Lecture: MW 1:30PM-2:45PM
+ Description: Manager class creates a manager object with
+              first name, last name, years of experience, 
+              and managing since.
+ */
+
 class Manager {
     // Instance variables
     public String firstName;
@@ -7,6 +16,7 @@ class Manager {
 
     // Constructors
     public Manager() {
+        // Set the default values
         firstName = "";
         lastName = "";
         yearsExperience = 0;
@@ -63,6 +73,7 @@ class Manager {
 
     // Return a string with the manager's information
     public String toString() {
-        return "\nLast Name:\t"+this.lastName+"\nFirst Name:\t"+this.firstName+"\nYears of Experience:\t"+this.yearsExperience+"\nManaging Since:\t"+this.managingSince+"\n";
+        return "\nLast Name:\t" + this.lastName + "\nFirst Name:\t" + this.firstName + "\nYears of Experience:\t"
+                + this.yearsExperience + "\nManaging Since:\t" + this.managingSince + "\n";
     }
 }
