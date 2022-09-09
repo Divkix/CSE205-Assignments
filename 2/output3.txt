@@ -1,0 +1,4 @@
+The minimum integer is -90
+The count of odd integers in the sequence is 5
+The largest even integer in the sequence is 90
+The sum of positive integers is 793
