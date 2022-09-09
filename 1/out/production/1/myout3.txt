@@ -1,4 +1,0 @@
-This program reads an integer from a keyboard
-and prints it out on the screen.
-make sure that you get the same output as the expected one.
-the read number is 1.
