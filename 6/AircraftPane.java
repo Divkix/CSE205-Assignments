@@ -90,27 +90,34 @@ public class AircraftPane extends HBox {
         // This is where you use the "new" keyword
         // vvvvvv 1. a) vvvvvv (about 8-12 lines)
         inputPane = new GridPane();
+        // create labels
         nameLabel = new Label("Name");
         bombCapacityLabel = new Label("Bomb Carrying Capacity");
         attackPowerLabel = new Label("Attack Power");
         stealthIndexLabel = new Label("Stealth Index");
+        // create text fields
         nameTextField = new TextField();
         bombCapacityTextField = new TextField();
         attackPowerTextField = new TextField();
         stealthIndexTextField = new TextField();
+        // create random button
         randomButton = new Button("Random");
         // ^^^^^^ 1. a) ^^^^^^
 
         // TODO 1. b) Initialize the instance variables and set Label color to RED
         // vvvvvv 1. b) vvvvvv (about 3 lines)
+        // create add new aircraft button
         Button addNewAircraftButton = new Button("Add New Aircraft!!!");
+        // create add aircraft status label
         addAircraftStatus = new Label();
+        // set label color to red
         addAircraftStatus.setTextFill(Color.RED);
         // ^^^^^^ 1. b) ^^^^^^
 
         // TODO 1. c) Organize Labels, TextFields, and Button onto the GridPane
         // vvvvvv 1. c) vvvvvv (about 8-12 lines)
         inputPane = new GridPane();
+        // set items in inputPane
         inputPane.add(nameLabel, 0, 0);
         inputPane.add(bombCapacityLabel, 0, 1);
         inputPane.add(attackPowerLabel, 0, 2);
@@ -125,12 +132,14 @@ public class AircraftPane extends HBox {
         // TODO: 1. d) Bind buttons to their handlers (RandomButtonHandler and
         // AddNewAircraftButtonHandler)
         // vvvvvv 1. d) vvvvvv (about 2 lines)
+        // bind random button to random button handler
         randomButton.setOnAction(new RandomButtonHandler());
         addNewAircraftButton.setOnAction(new AddNewAircraftButtonHandler());
         // ^^^^^^ 1. d) ^^^^^^
 
         // TODO: 1. e) Add GridPane, Button, and red Label to leftVBox
         // vvvvvv 1. e) vvvvvv (about 1-3 lines)
+        // add inputPane, add new aircraft button, and add aircraft status label to leftVBox
         leftVBox.getChildren().add(inputPane);
         leftVBox.getChildren().add(addNewAircraftButton);
         leftVBox.getChildren().add(addAircraftStatus);
@@ -169,6 +178,7 @@ public class AircraftPane extends HBox {
         public void handle(ActionEvent event) {
             // TODO: 2. Write "Random" Button Handler
             // vvvvvv 2. vvvvvv (about 8-12 lines)
+            // generate random stealth index value
             Button randomButton = new Button("Random");
             Random rand = new Random();
             int stealthIndex = rand.nextInt(10) + 1;
@@ -186,6 +196,7 @@ public class AircraftPane extends HBox {
             // TODO 3. a) Create 4 String variables and assign them to the values retrieved
             // from TextFields using .getText()
             // vvvvvv 3. a) vvvvvv (about 4 lines)
+            // create 4 string variables and assign them to the values retrieved from TextFields
             String name = nameTextField.getText();
             String bombCapacity = bombCapacityTextField.getText();
             String attackPower = attackPowerTextField.getText();
@@ -198,7 +209,6 @@ public class AircraftPane extends HBox {
             // - Satisfied all input requirement (non-negative, between a range, etc)
             // Use this try/catch block AND "throw new Exception()" to handle invalid input
             try {
-
                 // EXAMPLE: When the aircraft type is not selected
                 if (selectedAircraftType == null) {
                     // When you throw a new Exception, the program STOPS immediately
@@ -209,6 +219,7 @@ public class AircraftPane extends HBox {
                 // TODO: 3. b) If one of the TextFields is empty, throw exception with
                 // error message: "At least one of the text fields is empty"
                 // vvvvvv 3. b) vvvvvv (about 4 lines)
+                // if one of the TextFields is empty, throw exception with error message
                 if (name.equals("") || bombCapacity.equals("") || attackPower.equals("") || stealthIndex.equals("")) {
                     throw new Exception("At least one of the text fields is empty");
                 }
@@ -217,6 +228,7 @@ public class AircraftPane extends HBox {
                 // name; throw exception with
                 // error message: "Aircaft existed!"
                 // vvvvvv 3. c) vvvvvv (about 5 lines)
+                // loop through aircraftList to check for aircraft that has the same name and throw exception with error message
                 for (Aircraft aircraft : aircraftList) {
                     if (aircraft.getName().equals(name)) {
                         throw new Exception("Aircraft existed!");
@@ -230,6 +242,7 @@ public class AircraftPane extends HBox {
                 // not in the integer format
                 // Create 3 integers and convert the Strings from 3. a)
                 // vvvvvv 3. d) vvvvvv (about 3 lines)
+                // create 3 integers and convert the Strings to integers
                 int bombCapacityInt = Integer.parseInt(bombCapacity);
                 int attackPowerInt = Integer.parseInt(attackPower);
                 int stealthIndexInt = Integer.parseInt(stealthIndex);
@@ -240,6 +253,7 @@ public class AircraftPane extends HBox {
                 // if so, throw exception with error message "Both Bomb Carrying Capacity and
                 // Attack Power must be positive numbers"
                 // vvvvvv 3. e) vvvvvv (about 3 lines)
+                // check if Bomb Carrying Capacity or Attack Power is a negative number and throw exception with error message
                 if (bombCapacityInt < 0 || attackPowerInt < 0) {
                     throw new Exception("Both Bomb Carrying Capacity and Attack Power must be positive numbers");
                 }
@@ -249,6 +263,7 @@ public class AircraftPane extends HBox {
                 // If so, throw exception with error message "The sum of Carrying Capacity and
                 // Attack Power must be less or equal to 5000"
                 // vvvvvv 3. f) vvvvvv (about 3 lines)
+                // check if the sum of Carrying Capacity and Attack Power exceeds 5000 and throw exception with error message
                 if (bombCapacityInt + attackPowerInt > 5000) {
                     throw new Exception("The sum of Carrying Capacity and Attack Power must be less or equal to 5000");
                 }
@@ -259,6 +274,7 @@ public class AircraftPane extends HBox {
                 // with data from user input. Don't forget "selectedAircraftType"
                 // Finally, add the newly created aircraft to aircraftList
                 // vvvvvv 3. g) vvvvvv (about 2-8 lines, depends on your implementation)
+                // create newAircraft object with data from user input and add the newly created aircraft to aircraftList
                 Aircraft newAircraft = new Aircraft(selectedAircraftType, name, bombCapacityInt, attackPowerInt, stealthIndexInt);
                 aircraftList.add(newAircraft);
                 // ^^^^^^ 3. g) ^^^^^^
@@ -266,6 +282,7 @@ public class AircraftPane extends HBox {
                 // TODO 3: Set the Red Label to "Aircraft added successfully" and empty all
                 // TextFields
                 // vvvvvv 3. h) vvvvvv (about 5 lines)
+                // set the Red Label to "Aircraft added successfully" and empty all TextFields
                 addAircraftStatus.setText("Aircraft added successfully");
                 nameTextField.setText("");
                 bombCapacityTextField.setText("");
@@ -274,6 +291,7 @@ public class AircraftPane extends HBox {
                 // ^^^^^^ 3. h) ^^^^^^
                 // TODO 4. b) Call updateTextArea() to update aircrafts list
                 // vvvvvv 4. b) vvvvvv (1 line)
+                // call updateTextArea() to update aircrafts list
                 updateTextArea();
                 // ^^^^^^ 4. b) ^^^^^^
             } catch (
@@ -281,6 +299,7 @@ public class AircraftPane extends HBox {
             NumberFormatException exception) {
                 // set RED LABEL to "At least one of the text fields is in the incorrect format"
                 // vvvvvv 3. d) vvvvvv (1 line)
+                // set RED colored label to "At least one of the text fields is in the incorrect format"
                 addAircraftStatus.setText("At least one of the text fields is in the incorrect format");
                 // ^^^^^^ 3. d) ^^^^^^
             } catch (Exception exception) {
@@ -290,6 +309,7 @@ public class AircraftPane extends HBox {
                 // Set the value of the RED LABEL to exception.getMessage() to display error
                 // message
                 // vvvvvv 3. b) vvvvvv (1 line)
+                // set the value of the RED colored label to exception.getMessage() to display error message
                 addAircraftStatus.setText(exception.getMessage());
                 // ^^^^^^ 3. b) ^^^^^^
             }
@@ -301,6 +321,7 @@ public class AircraftPane extends HBox {
     // and loop through aircraftList to add all aircrafts' data together
     private void updateTextArea() {
         // vvvvvv 4. a) vvvvvv (about 5-10 lines)
+        // create a String containing all aircraft information and loop through aircraftList to add all aircrafts' data together
         String aircrafts = "";
         for (Aircraft aircraft : aircraftList) {
             aircrafts += aircraft.toString();
