@@ -55,15 +55,15 @@ public class SketchPane extends BorderPane {
     // Task 2: Implement the constructor
     public SketchPane() {
         // Define colors, labels, stroke widths that are available to the user
-        colors = new Color[]{Color.BLACK, Color.GREY, Color.YELLOW,
+        colors = new Color[] { Color.BLACK, Color.GREY, Color.YELLOW,
                 Color.GOLD, Color.ORANGE, Color.DARKRED, Color.PURPLE, Color.HOTPINK, Color.TEAL,
-                Color.DEEPSKYBLUE, Color.LIME};
-        colorLabels = new String[]{"black", "grey", "yellow", "gold",
-                "orange", "dark red", "purple", "hot pink", "teal", "deep sky blue", "lime"};
+                Color.DEEPSKYBLUE, Color.LIME };
+        colorLabels = new String[] { "black", "grey", "yellow", "gold",
+                "orange", "dark red", "purple", "hot pink", "teal", "deep sky blue", "lime" };
         fillColorLabel = new Label("Fill Color:");
         strokeColorLabel = new Label("Stroke Color:");
         strokeWidthLabel = new Label("Stroke Width:");
-        strokeWidth = new String[]{"1", "3", "5", "7", "9", "11", "13"};
+        strokeWidth = new String[] { "1", "3", "5", "7", "9", "11", "13" };
 
         // Create the Undo and Erase Button, register the two Buttons with the
         // ButtonHandler
@@ -123,8 +123,7 @@ public class SketchPane extends BorderPane {
                 strokeColorLabel,
                 strokeColorCombo,
                 strokeWidthLabel,
-                strokeWidthCombo
-        );
+                strokeWidthCombo);
 
         // Instantiate an HBox to hold the RadioButtons and Buttons. To achieve the
         // given layout, instantiate the HBox with size 20 and set the minimum size to
@@ -238,9 +237,8 @@ public class SketchPane extends BorderPane {
                     x1 = event.getX();
                     y1 = event.getY();
                     triangle = new Polygon();
-                    triangle.getPoints().addAll(x1, y1,
-                            x1 + 20, y1 + 20,
-                            x1 - 20, y1 + 20);
+                    // create a 3 sided polygon with the first point at the mouse press
+                    triangle.getPoints().addAll(x1, y1, x1, y1, x1, y1);
                     triangle.setFill(Color.WHITE);
                     triangle.setStroke(Color.BLACK);
                     shapeList.add(triangle);
@@ -248,7 +246,7 @@ public class SketchPane extends BorderPane {
                 } else if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
                     // Mouse is dragged
                     triangle.getPoints().clear();
-                    // create triangle with the dimensions of mouse dragged
+                    // create an isoceles triangle with the dimensions of mouse dragged
                     triangle.getPoints().addAll(x1, y1,
                             x1 + event.getX(), y1 + event.getY(),
                             x1 - event.getX(), y1 + event.getY());
