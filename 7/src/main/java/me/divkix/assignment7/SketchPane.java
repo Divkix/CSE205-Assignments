@@ -6,27 +6,28 @@
 //               This class is responsible for creating the
 //               GUI and handling the events.
 
-import javafx.scene.layout.*;
-import javafx.scene.shape.Shape;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Ellipse;
-import javafx.scene.paint.Color;
-import javafx.geometry.Pos;
+package me.divkix.assignment7;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+
 import java.util.ArrayList;
 
 public class SketchPane extends BorderPane {
     // Task 1: Declare all instance variables listed in UML diagram
-    private ArrayList<Shape> shapeList = new ArrayList<Shape>();
-    private ArrayList<Shape> tempList = new ArrayList<Shape>();
+    private ArrayList<Shape> shapeList = new ArrayList<>();
+    private ArrayList<Shape> tempList = new ArrayList<>();
     private Button undoButton;
     private Button eraseButton;
     private Label fillColorLabel;
@@ -34,7 +35,7 @@ public class SketchPane extends BorderPane {
     private Label strokeWidthLabel;
     private ComboBox<String> fillColorCombo;
     private ComboBox<String> strokeWidthCombo;
-    private ComboBox<String> strikeColorCombo;
+    private ComboBox<String> strokeColorCombo;
     private RadioButton radioButtonRectangle;
     private RadioButton radioButtonEllipse;
     private RadioButton radioButtonTriangle;
@@ -54,15 +55,15 @@ public class SketchPane extends BorderPane {
     // Task 2: Implement the constructor
     public SketchPane() {
         // Define colors, labels, stroke widths that are available to the user
-        colors = new Color[] { Color.BLACK, Color.GREY, Color.YELLOW,
+        colors = new Color[]{Color.BLACK, Color.GREY, Color.YELLOW,
                 Color.GOLD, Color.ORANGE, Color.DARKRED, Color.PURPLE, Color.HOTPINK, Color.TEAL,
-                Color.DEEPSKYBLUE, Color.LIME };
-        colorLabels = new String[] { "black", "grey", "yellow", "gold",
-                "orange", "dark red", "purple", "hot pink", "teal", "deep sky blue", "lime" };
+                Color.DEEPSKYBLUE, Color.LIME};
+        colorLabels = new String[]{"black", "grey", "yellow", "gold",
+                "orange", "dark red", "purple", "hot pink", "teal", "deep sky blue", "lime"};
         fillColorLabel = new Label("Fill Color:");
         strokeColorLabel = new Label("Stroke Color:");
         strokeWidthLabel = new Label("Stroke Width:");
-        strokeWidth = new String[] { "1", "3", "5", "7", "9", "11", "13" };
+        strokeWidth = new String[]{"1", "3", "5", "7", "9", "11", "13"};
 
         // Create the Undo and Erase Button, register the two Buttons with the
         // ButtonHandler
@@ -79,10 +80,10 @@ public class SketchPane extends BorderPane {
         fillColorCombo.getItems().addAll(colorLabels);
         fillColorCombo.setValue("black");
         fillColorCombo.setOnAction(new ColorHandler());
-        strikeColorCombo = new ComboBox<String>();
-        strikeColorCombo.getItems().addAll(colorLabels);
-        strikeColorCombo.setValue("black");
-        strikeColorCombo.setOnAction(new WidthHandler());
+        strokeColorCombo = new ComboBox<String>();
+        strokeColorCombo.getItems().addAll(colorLabels);
+        strokeColorCombo.setValue("black");
+        strokeColorCombo.setOnAction(new ColorHandler());
         strokeWidthCombo = new ComboBox<String>();
         strokeWidthCombo.getItems().addAll(strokeWidth);
         strokeWidthCombo.setValue("1");
@@ -116,8 +117,14 @@ public class SketchPane extends BorderPane {
         hBox.setMinSize(20, 40);
         hBox.setAlignment(Pos.CENTER);
         hBox.setStyle("-fx-background-color: lightgrey");
-        hBox.getChildren().addAll(fillColorLabel, fillColorCombo, strokeColorLabel, strikeColorCombo, strokeWidthLabel,
-                strokeWidthCombo);
+        hBox.getChildren().addAll(
+                fillColorLabel,
+                fillColorCombo,
+                strokeColorLabel,
+                strokeColorCombo,
+                strokeWidthLabel,
+                strokeWidthCombo
+        );
 
         // Instantiate an HBox to hold the RadioButtons and Buttons. To achieve the
         // given layout, instantiate the HBox with size 20 and set the minimum size to
@@ -151,6 +158,11 @@ public class SketchPane extends BorderPane {
         currentStrokeWidth = 1;
     }
 
+    // Get the Euclidean distance between (x1,y1) and (x2,y2)
+    private double getDistance(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
+
     private class MouseHandler implements EventHandler<MouseEvent> {
         @Override
         public void handle(MouseEvent event) {
@@ -169,11 +181,12 @@ public class SketchPane extends BorderPane {
             // width to the choices the user selected.
 
             if (radioButtonEllipse.isSelected()) {
-                // If user chooses Ellipse, draw a ellipse
+                // If user chooses Ellipse, draw an ellipse
                 if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
                     // Mouse is pressed
                     x1 = event.getX();
                     y1 = event.getY();
+                    ellipse = new Ellipse();
                     ellipse.setCenterX(x1);
                     ellipse.setCenterY(y1);
                     ellipse.setFill(Color.WHITE);
@@ -225,11 +238,9 @@ public class SketchPane extends BorderPane {
                     x1 = event.getX();
                     y1 = event.getY();
                     triangle = new Polygon();
-                    triangle.getPoints().addAll(new Double[] {
-                            x1, y1,
-                            x1 + 50, y1 + 50,
-                            x1 - 50, y1 + 50
-                    });
+                    triangle.getPoints().addAll(x1, y1,
+                            x1 + 20, y1 + 20,
+                            x1 - 20, y1 + 20);
                     triangle.setFill(Color.WHITE);
                     triangle.setStroke(Color.BLACK);
                     shapeList.add(triangle);
@@ -237,11 +248,10 @@ public class SketchPane extends BorderPane {
                 } else if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
                     // Mouse is dragged
                     triangle.getPoints().clear();
-                    triangle.getPoints().addAll(new Double[] {
-                            x1, y1,
-                            x1 + 50, y1 + 50,
-                            x1 - 50, y1 + 50
-                    });
+                    // create triangle with the dimensions of mouse dragged
+                    triangle.getPoints().addAll(x1, y1,
+                            x1 + event.getX(), y1 + event.getY(),
+                            x1 - event.getX(), y1 + event.getY());
                 } else if (event.getEventType() == MouseEvent.MOUSE_RELEASED) {
                     // If the Mouse is released
                     triangle.setFill(currentFillColor);
@@ -307,8 +317,8 @@ public class SketchPane extends BorderPane {
             // for the strokeColorCombo and currentStrokeColor.
             if (event.getSource() == fillColorCombo) {
                 currentFillColor = colors[fillColorCombo.getSelectionModel().getSelectedIndex()];
-            } else if (event.getSource() == strikeColorCombo) {
-                currentStrokeColor = colors[strikeColorCombo.getSelectionModel().getSelectedIndex()];
+            } else if (event.getSource() == strokeColorCombo) {
+                currentStrokeColor = colors[strokeColorCombo.getSelectionModel().getSelectedIndex()];
             } else if (event.getSource() == strokeWidthCombo) {
                 currentStrokeWidth = Integer.parseInt(strokeWidthCombo.getSelectionModel().getSelectedItem());
             }
@@ -326,10 +336,5 @@ public class SketchPane extends BorderPane {
             // the variable currentStrokeWidth.
             currentStrokeWidth = Integer.parseInt(strokeWidthCombo.getSelectionModel().getSelectedItem());
         }
-    }
-
-    // Get the Euclidean distance between (x1,y1) and (x2,y2)
-    private double getDistance(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 }
