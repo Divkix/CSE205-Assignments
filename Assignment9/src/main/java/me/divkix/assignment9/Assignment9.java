@@ -118,7 +118,10 @@ public class Assignment9 {
 
     // utility method to give sum of all even numbers in an ArrayList
     public static int sumEven(int[] arr)  {
-        // if length of the arraylist is 0, return 0
+        // initiate a variable to make sure at least one even number is present
+        boolean anyEven = false;
+
+        // if length of the arraylist is 0, return -1
         if (arr.length == 0) {
             return 0;
         }
@@ -126,19 +129,23 @@ public class Assignment9 {
         // iterate over the array and make sure all numbers are even,
         // if not, return 0
         for (int j: arr) {
-            if (j % 2 != 0) {
-                return 0;
+            if (j % 2 == 0) {
+                anyEven = true;
             }
         }
 
+        // if 'anyeven' is false, return 0
+        if (!anyEven) {
+            return 0;
+        }
 
-        // check if number is even, else remove it from the array and call the method again
+        // check if number is even, else remove it from the arraylist and call the method again
         if (arr[0] % 2 == 0) {
             return arr[0] + sumEven(Arrays.copyOfRange(arr, 1, arr.length));
         }
 
-        // if the number is even, add it to the sum and remove it from the array
-        // then call the method again, we are using recursion here
+        // if the number is even, add it to the sum and remove it from the arraylist
+        // then call the method again
         return sumEven(Arrays.copyOfRange(arr, 1, arr.length));
     }
 
