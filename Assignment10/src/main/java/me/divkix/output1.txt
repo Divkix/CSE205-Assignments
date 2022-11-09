@@ -1,0 +1,56 @@
+Welcome to Flight Management System:
+Choice		Action
+------		------
+A		Add a new flight to the queue
+C		Find how many passengers are flying to a destination
+D		Get next flight in the queue
+L		List all flights in the queue
+P		Find the position of a flight in the queue
+R		Remove a flight from the queue
+Q		Quit
+?		Display Help
+
+What action would you like to perform?
+Please enter flight number:
+Please enter destination:
+Please enter number of passengers:
+Fligh added successfully.
+
+What action would you like to perform?
+Please enter flight number:
+Please enter destination:
+Please enter number of passengers:
+Fligh added successfully.
+
+What action would you like to perform?
+
+Flight Number AA5412 going to Pittsburgh has 122 passengers.
+
+Flight Number Delta22 going to Phoenix has 205 passengers.
+
+Total flights: 2.
+
+What action would you like to perform?
+Please enter flight number:
+Please enter destination:
+Please enter number of passengers:
+Fligh added successfully.
+
+What action would you like to perform?
+
+Flight Number AA5412 going to Pittsburgh has 122 passengers.
+
+Flight Number Delta22 going to Phoenix has 205 passengers.
+
+Flight Number KLM09 going to Phoenix has 100 passengers.
+
+Total flights: 3.
+
+What action would you like to perform?
+Please enter the destination you'd like to count the number of passengers for:
+There are 305 passengers flying to Phoenix.
+
+What action would you like to perform?
+Next flight is AA5412 going to Pittsburgh with 122 passengers on board.
+
+What action would you like to perform?
