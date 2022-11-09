@@ -6,7 +6,7 @@
 //              handles the whole program and calls
 //              the methods.
 
-package me.divkix;
+//package me.divkix;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -61,11 +61,11 @@ public class Assignment10 {
 
                         case 'D':   // Get next flight in the queue
                             Flight nextInLine = flightQueue.removeFirstFlight();
-                            if(nextInLine.numberOfPassengers == -1)
+                            if (nextInLine.numberOfPassengers == -1)
                                 System.out.println("No flights scheduled for departure currently.\n");
                             else
-                                System.out.printf("Next flight is %s going to %s with %d passengers on board.\n\n", 
-                                    nextInLine.flightNumber, nextInLine.destination, nextInLine.numberOfPassengers);
+                                System.out.printf("Next flight is %s going to %s with %d passengers on board.\n\n",
+                                        nextInLine.flightNumber, nextInLine.destination, nextInLine.numberOfPassengers);
                             break;
 
                         case 'L':   // List all the flights
@@ -77,7 +77,7 @@ public class Assignment10 {
                             System.out.println("Please enter the flight number you'd like to know the position of in the queue:");
                             input = stdin.readLine().trim();
                             int result = flightQueue.getPosition(input);
-                            if(result == -1)
+                            if (result == -1)
                                 System.out.println("Flight not found, please try again.\n");
                             else
                                 System.out.printf("Flight number %s is currently at position %d in the queue.\n\n", input, result + 1);
@@ -87,12 +87,12 @@ public class Assignment10 {
                             System.out.println("Please enter the flight number you'd like to remove from the queue:");
                             input = stdin.readLine().trim();
                             Flight flight = flightQueue.removeFlight(input);
-                            if(flight.numberOfPassengers == -1)
+                            if (flight.numberOfPassengers == -1)
                                 System.out.println("Flight not found, please try again.\n\n");
                             else
                                 System.out.printf("Flight number %s going to %s has been cancelled.\n\n", flight.flightNumber, flight.destination);
                             break;
-                        
+
                         case 'Q':   //Quit
                             break;
 
@@ -105,15 +105,13 @@ public class Assignment10 {
                             break;
                     }
                 }
-            }while(input1 != 'Q' || line.length() != 1);
-        }catch (IOException exception)
-        {
+            } while (input1 != 'Q' || line.length() != 1);
+        } catch (IOException exception) {
             System.out.print("IO Exception\n");
         }
     }
 
-    public static void printMenu()
-    {
+    public static void printMenu() {
         System.out.print("Choice\t\tAction\n" +
                 "------\t\t------\n" +
                 "A\t\tAdd a new flight to the queue\n" +

@@ -2,11 +2,10 @@
 //        Name: Divanshu Chauhan
 //   StudentID: 1224807311
 //     Lecture: MW 1:30-2:45PM
-// Description: Main class for Assignment 10 which
-//              handles the whole program and calls
-//              the methods.
+// Description: Main class for Flight which
+//              is used by program.
 
-package me.divkix;
+//package me.divkix;
 
 public class Flight {
     String flightNumber;
@@ -14,14 +13,14 @@ public class Flight {
     int numberOfPassengers;
     Flight next;
 
-    public Flight(String flightNumber, String destination, int numberOfPassengers){
+    public Flight(String flightNumber, String destination, int numberOfPassengers) {
         this.flightNumber = flightNumber;
         this.destination = destination;
         this.numberOfPassengers = numberOfPassengers;
         this.next = null;
     }
 
-    public String toString(){
+    public String toString() {
         return "\nFlight Number " + this.flightNumber + " going to " + this.destination + " has " + this.numberOfPassengers + " passengers" + ".\n";
     }
 
