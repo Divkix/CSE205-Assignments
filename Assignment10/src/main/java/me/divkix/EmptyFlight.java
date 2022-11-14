@@ -5,7 +5,7 @@
 // Description: Main class for EmptyFlight which
 //              is used by program.
 
-//package me.divkix;
+package me.divkix;
 
 public class EmptyFlight extends Flight {
 

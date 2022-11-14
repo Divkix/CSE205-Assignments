@@ -6,7 +6,7 @@
 //              handles the whole program and calls
 //              the methods.
 
-//package me.divkix;
+package me.divkix;
 
 public class LinkedList {
     Flight first;
